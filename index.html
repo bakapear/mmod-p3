@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>p3!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        // goodies
+        function toggleBG(bg) {
+            bg.classList.toggle('dark')
+            bg.classList.toggle('light')
+        }
+
+        function toggleSidebar(sidebar) {
+            sidebar.classList.toggle('open')
+        }
+
+        function toggleButton(button) {
+            button.classList.toggle('active')
+        }
+
+        function toggleExtra(page) {
+            page.classList.toggle('close')
+        }
+
+        function toggleThumb(div) {
+            Array.from(div.parentElement.children).forEach(x => x.classList.remove('active'))
+            div.classList.add('active')
+            let src = div.children[0].src
+            let img = document.getElementById('page-image')
+            img.style.backgroundImage = `url(${src})`
+        }
+    </script>
+    <script>
+        // load dynamic data for showcase
+
+        // ew
+        let setText = (node, text, alt) => alt ? node.querySelector('.'+text).innerText = alt : document.getElementById(node).innerText = text
+        let setImage = (node, url, alt) => alt ? node.querySelector('.'+url).style.backgroundImage = `url('${alt}')` : document.getElementById(node).style.backgroundImage = `url('${url}')`
+        let setStyle = (node, style, value) => document.getElementById(node).style[style] = value
+
+        let addMapItem = obj => {
+            let template = document.getElementById('map-template').cloneNode(true).content
+            let items = document.getElementById('items')
+
+            setImage(template, 'map-image', obj.img)
+            setText(template, 'map-name', obj.name)
+            setText(template, 'map-tier', obj.tier)
+            setText(template, 'map-type', obj.type)
+            setText(template, 'map-zones', obj.zones)
+
+            items.appendChild(template)
+        }
+
+        window.onload = () => {
+            setImage('profile-bg', 'data/user/background.webp')
+            setImage('profile-avatar', 'data/user/avatar.jpg')
+            setText('profile-name', 'trazbutwithaverylongname')
+            setText('profile-badges', '<badges here>')
+            setText('profile-units', '472 082')
+            setStyle('profile-progress', 'width', '90%')
+            setText('profile-level', '271')
+
+            addMapItem({
+                name: 'sj_providence',
+                img: "data/map/sj_providence.jpg",
+                tier: 4,
+                type: "L",
+                zones: 18
+            })
+
+            addMapItem({
+                name: 'surf_antichamber',
+                img: "data/map/surf_antichamber.jpg",
+                tier: 4,
+                type: "S",
+                zones: 4
+            })
+
+            addMapItem({
+                name: 'bhop_oldschool',
+                img: "data/map/bhop_oldschool.jpg",
+                tier: 2,
+                type: "L",
+                zones: 5
+            })
+
+            addMapItem({
+                name: 'bhop_perspective',
+                img: "data/map/bhop_perspective.jpg",
+                tier: 2,
+                type: "L",
+                zones: 9
+            })
+
+            addMapItem({
+                name: 'surf_be_gentle',
+                img: "data/map/surf_be_gentle.jpg",
+                tier: 3,
+                type: "L",
+                zones: 4
+            })
+
+            addMapItem({
+                name: "ahop_coast",
+                img: "data/map/ahop_coast.jpg",
+                tier: 2,
+                type: "S",
+                zones: 9
+            })
+
+            addMapItem({
+                name: "conc_xtyr",
+                img: "data/map/conc_xtyr.jpg",
+                tier: 8,
+                type: "S",
+                zones: 5
+            })
+
+            addMapItem({
+                name: "sj_naissancee",
+                img: "data/map/sj_naissancee.jpg",
+                tier: 5,
+                type: "L",
+                zones: 9
+            })
+
+            addMapItem({
+                name: "ahop_easy",
+                img: "data/map/ahop_easy.jpg",
+                tier: 1,
+                type: "L",
+                zones: 5
+            })
+         
+            document.querySelectorAll('.actions > div button').forEach(x => {
+                if(Math.random() > 0.5) x.classList.add('active')
+            })
+
+            document.querySelectorAll('.actions > button').forEach(x => {
+                // look at these chances! amazing
+                let types = ['play','play', 'download','download','download','reload']
+                let state = types[Math.floor(Math.random() * types.length)]
+                x.children[0].src = `assets/img/${state}.svg`
+                x.classList.add(state)
+            })
+
+            document.querySelectorAll('.item').forEach(x => {
+                if(Math.random() > 0.66) x.classList.add('played')
+            })
+
+            // press this so map image appears ok
+            document.querySelector('.pick .active').click()
+        }
+    </script>
+</head>
+
+<body class="dark">
+    <div class="dim"></div>
+    <div class="header">
+        <div class="logo br"><img src="assets/img/logo.svg"></div>
+        <div class="nav">
+            <div class="active"><img src="assets/img/play.svg"></div>
+            <div><img src="assets/img/inventory.svg"></div>
+            <div><img src="assets/img/shop.svg"></div>
+            <div><img src="assets/img/learn.svg" title="get gud"></div>
+            <div><img src="assets/img/settings.svg"></div>
+        </div>
+        <div class="profile">
+            <div id="profile-bg"></div>
+            <div class="inner">
+                <div id="profile-avatar"></div>
+                <div class="info">
+                    <div id="profile-name"></div>
+                    <div id="profile-badges"></div>
+                    <div class="stats">
+                        <div id="profile-units"></div>
+                        <img src="assets/img/units.svg">
+                        <div class="level">
+                            <img src="assets/img/prestige.svg">
+                            <div id="profile-level"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="progress">
+                <div id="profile-progress"></div>
+            </div>
+        </div>
+        <div class="notif">
+            <div><img src="assets/img/notification.svg"></div>
+        </div>
+        <div class="nav bl" onclick="toggleBG(document.body)">
+            <div><img src="assets/img/quit.svg"></div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div class="nav" onclick="toggleSidebar(this.parentNode)">
+            <div><img src="assets/img/profile.svg"></div>
+            <div><img src="assets/img/lobby.svg"></div>
+            <div><img src="assets/img/news.svg"></div>
+            <div><img src="assets/img/records.svg"></div>
+            <div><img src="assets/img/arrow.svg"></div>
+        </div>
+    </div>
+    <div id="main">
+        <!-- browse stuff -->
+        <div class="row">
+            <div class="search">
+                <span>Map Selector</span>
+                <div class="input">
+                    <img src="assets/img/search.svg">
+                    <input placeholder="Search All Maps">
+                </div>
+                <button>Filters</button>
+            </div>
+            <div id="items"></div>
+        </div>
+        <!-- hardcoded this because im lazy- but its not a big deal to make it load data dynamically -->
+        <div class="row">
+            <div class="page">
+                <div class="top">
+                    <div class="thumbs">
+                        <div id="page-image"></div>
+                        <div class="pick">
+                            <div onclick="toggleThumb(this)" class="active"><img src="data/side/main.png"></div>
+                            <div onclick="toggleThumb(this)"><img src="data/side/2.jpg"></div>
+                            <div onclick="toggleThumb(this)"><img src="data/side/3.jpg"></div>
+                            <div onclick="toggleThumb(this)"><img src="data/side/4.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span>sj_providence</span>
+                        <div class="stats">
+                            <span>TIER 4</span>
+                            <span>Linear</span>
+                            <span>20 Zones</span>
+                        </div>
+                        <div class="box">
+                            <div>An arid, industrial landscape. Designed with speedrunning in mind, this map offers a challenge to both intermediate jumpers and experienced runners. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</div>
+                        </div>
+                        <div class="line">
+                            <img src="assets/img/play.svg">
+                            <span>Total Plays:</span>
+                            <span>283 729 713</span>
+                        </div>
+                        <div class="line">
+                            <img src="assets/img/percent.svg">
+                            <span>Total Completions:</span>
+                            <span>228</span>
+                        </div>
+                        <div class="line">
+                            <img src="assets/img/time.svg">
+                            <span>Average Time:</span>
+                            <span>3:34.342</span>
+                        </div>
+                        <div class="buttons">
+                            <button class="play">
+                                <img src="assets/img/play.svg">
+                                <span>Play</span>
+                            </button>
+                            <div>
+                                <button>
+                                    <img src="assets/img/add.svg">
+                                </button> 
+                                <button>
+                                    <img src="assets/img/star.svg">
+                                </button> 
+                            </div>
+                            <button class="delete">
+                                <img src="assets/img/trash.svg">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra">
+                    <div class="playlists">
+                        <span>Playlists:</span>
+                            <div class="tag">complete sometime</div>
+                            <div class="tag">cool maps</div>
+                            <div class="tag">Made by Friends</div>
+                            <div class="tag">dope visuals</div>
+                            <div class="tag">3 Others...</div>
+                    </div>
+                    <div class="boxes">
+                        <div class="box left">
+                            <span>Map Statistics</span>
+                            <div>
+                                <div>
+                                    <span>Total Completions: 228</span>
+                                    <span>Unique Completions: 42</span>
+                                    <span>Total Jumps: 5763</span>
+                                    <span>Total Strafes: 138630</span>
+                                </div>
+                                <div>
+                                    <span>105 123 Libraries</span>
+                                    <span>953 123 Favorites</span>
+                                    <span>102 324 534 Downloads</span>
+                                    <span>283 729 713 Total Plays</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box right">
+                            <div>
+                                <div>
+                                    <span>Author(s):</span>
+                                    <span>False_, SecondAuthor, eXample, TexT</span>
+                                </div>
+                                <div>
+                                    <span>Special Thanks:</span>
+                                    <span>Cabbage McGravel</span>
+                                </div>
+                                <div>
+                                    <span>Coke or Pepsi:</span>
+                                    <span>you wanna know</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span>Tags:</span>
+                        <div class="tag">canyon</div>
+                        <div class="tag">abandoned</div>
+                        <div class="tag">rusty</div>
+                        <div class="tag">closed world</div>
+                        <div class="tag">cartoon</div>
+                        <div class="tag">amazing tag</div>
+                        <div class="tag">crazy</div>
+                        <div class="tag">canyon</div>
+                        <div class="tag">abandoned</div>
+                        <div class="tag">rusty</div>
+                        <div class="tag">closed world</div>
+                    </div>
+                </div>
+                <div class="fold" onclick="toggleExtra(this.parentElement)"><img src="assets/img/arrow.svg"></div>
+            </div>
+            <div class="leaderboard">
+                <span>&gt; not responsive, view in fullscreen &lt;</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<template id="map-template">
+    <div class="item">
+        <div class="map-image"></div>
+        <div class="info">
+            <span class="map-name"></span>
+            <div>
+                <span class="map-tier"></span>
+                <span class="map-type"></span>
+                <span class="map-zones"></span>
+            </div>
+        </div>
+        <div class="actions">
+            <div>
+                <button onclick="toggleButton(this)"><img src="assets/img/star.svg"></button>
+                <button onclick="toggleButton(this)"><img src="assets/img/add.svg"></button>
+            </div>
+            <button><img src="assets/img/play.svg"></button>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,187 @@
+.header {
+  width: 100%;
+  height: 100px;
+  background: rgba(255,255,255,.3);
+  display: flex
+}
+
+.logo {
+  justify-content: center;
+  padding: 0 30px;
+  height: 100%
+}
+
+.logo img {
+  width: 360px
+}
+
+.logo,.header .nav,.header .nav>div {
+  display: flex
+}
+
+.header .nav>div {
+  justify-content: center;
+  width: 92px
+}
+
+.header .nav>.active img {
+  filter: brightness(10%) opacity(40%)
+}
+
+.header .nav>div:hover:not(.active) {
+  background: rgba(255,255,255,.2);
+  cursor: pointer
+}
+
+.header .nav img {
+  width: 45px
+}
+
+.bl {
+  border-left: 1px solid rgba(255,255,255,.2)
+}
+
+.br {
+  border-right: 1px solid rgba(255,255,255,.2)
+}
+
+.notif,.notif>div {
+  display: flex;
+  align-items: center
+}
+
+.notif {
+  margin: 0 18px;
+  justify-content: center
+}
+
+.notif>div {
+  background: rgba(255,255,255,.2);
+  border-radius: 3px;
+  padding: 4px
+}
+
+.notif:hover {
+  cursor: pointer
+}
+
+.notif:hover>div {
+  background: rgba(255,255,255,.5)
+}
+
+.notif img {
+  width: 28px
+}
+
+.profile {
+  position: relative;
+  margin-left: auto;
+  min-width: calc(400px - 12px*2);
+  padding: 12px 10px;
+  z-index: 0
+}
+
+#profile-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: -40px -112px;
+  background-size: 300px
+}
+
+#profile-name {
+  height: 24px;
+  line-height: 20px;
+  font-size: 24px;
+  font-family: "Roboto Regular";
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0,0,0,.8);
+  text-overflow: ellipsis;
+  overflow: hidden
+}
+
+.profile .inner {
+  display: flex;
+  height: 64px
+}
+
+.profile .progress {
+  height: 7px;
+  background: #273840;
+  box-shadow: 0 2px 5px rgba(0,0,0,.8);
+  margin-top: 6px
+}
+
+#profile-progress {
+  transition: width 0.5s ease;
+  background: linear-gradient(90deg,#1896d3,#70efff);
+  height: 100%;
+  width: 0
+}
+
+#profile-avatar {
+  min-width: 64px;
+  margin-right: 10px;
+  background-size: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,.8)
+}
+
+#profile-badges,#profile-units {
+  text-shadow: 0 0 5px rgba(0,0,0,.8)
+}
+
+#profile-badges {
+  display: flex;
+  margin-top: -3px;
+  font-size: 20px;
+  font-family: "Bebas Neue";
+  color: #fcb83a
+}
+
+#profile-units {
+  font-size: 14px;
+  font-family: "Roboto Light";
+  color: #fff
+}
+
+#profile-units::after {
+  content: " UNITS"
+}
+
+.profile .info {
+  width: calc(100% - 64px - 10px)
+}
+
+.profile .stats>img {
+  margin-top: 2px;
+  margin-left: 4px;
+  height: 12px
+}
+
+.profile .level,.profile .stats {
+  display: flex
+}
+
+.profile .level {
+  margin-left: auto;
+  background: #ff8645;
+  box-shadow: 0 2px 5px rgba(0,0,0,.8);
+  height: 15px;
+  padding: 0 4px;
+  align-items: center
+}
+
+#profile-level {
+  font-family: "Roboto Bold";
+  font-size: 10px;
+  color: #fff
+}
+
+.profile .level>img {
+  height: 9px;
+  margin-right: 3px
+}

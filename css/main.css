@@ -1,0 +1,60 @@
+@import "fonts.css";
+
+@import "header.css";
+
+@import "sidebar.css";
+
+@import "main/browse.css";
+
+body,html {
+    margin: 0;
+    height: 100%
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none
+}
+
+body {
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-y: hidden; /* yep */
+    transition: background-image 0.2s ease;
+}
+
+body.dark {
+    background-image: url(../assets/img/bg_dark.png)
+}
+
+body.light {
+    background-image: url(../assets/img/bg_light.png);
+}
+
+.dim {
+    position: fixed;
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    z-index: -1
+}
+
+#main {
+    display: flex;
+    padding: 40px;
+    overflow-y: scroll;
+    height: calc(100% - 180px);
+    width: calc(100% - 50px - 80px);
+    overflow-x: hidden; /* yep yep */
+}
+
+#main::-webkit-scrollbar {
+  background:none;
+  width:8px;
+}
+
+#main::-webkit-scrollbar-thumb {
+  background:rgba(255,255,255,0.5);
+}
