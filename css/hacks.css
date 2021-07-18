@@ -1,0 +1,28 @@
+@media (max-width: 1450px) {
+    .header .nav.bl { display: none; }
+}
+
+@media (max-width: 1400px) {
+    .header .profile .info { display: none; }
+    .header .profile { min-width: auto; }
+    #profile-avatar { margin-right: 0; }
+}
+
+@media (max-width: 1050px) {
+    .header .nav { display:none;}
+}
+
+@media (max-width: 600px) {
+    .header .notif { display:none; }
+    .header .logo { padding: 0 25px;}
+}
+
+.row:last-child {
+    flex-grow: 1;
+    width: auto;
+}
+
+@media (max-width: 1600px) {
+    .row:last-child { display:none; }
+    .row:first-child { width: 100%; padding: 0; }
+}
